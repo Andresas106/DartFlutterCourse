@@ -15,4 +15,39 @@ class Producto {
       print('El id tiene que ser mayor a 0');
     }
   }
+
+  String get nombre => _nombre;
+
+  set nombre(String newNombre){
+    if(newNombre.isNotEmpty){
+      _nombre = newNombre;
+    }
+    else{
+      print('El nombre no puede estar vacio');
+    }
+  }
+
+  int get cantidad => _cantidad;
+
+  set cantidad(int newCantidad){
+    if(newCantidad > 0){
+      _cantidad = newCantidad;
+    }
+    else{
+      print('La cantidad tiene que ser mayor a 0');
+    }
+  }
+
+  double get precio => _precio;
+
+  set precio(double newPrecio){
+    if(newPrecio > 0){
+      _precio = newPrecio;
+    }
+    else
+      {
+        print('El precio tiene que ser mayor a 0');
+      }
+  }
+
 }
