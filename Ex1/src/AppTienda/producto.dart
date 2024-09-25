@@ -50,4 +50,9 @@ class Producto {
       }
   }
 
+  @override
+  String toString() {
+    String str = 'id: $_id, nombre: $_nombre, Cantidad: $_cantidad, Precio: $_precio';
+    return str;
+  }
 }

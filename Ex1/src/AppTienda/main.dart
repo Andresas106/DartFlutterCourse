@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'ProductoManager.dart';
+
 void main()
 {
   menu();
 }
 
 void menu(){
+  var pManager = ProductoManager();
   int? numero;
   do {
     print('****************    MENU    ****************');
@@ -21,19 +24,35 @@ void menu(){
       switch(numero)
       {
         case 1:
-          agregarProducto();
+          try{
+              print('Introduce id del producto:');
+              int? id = int.parse(stdin.readLineSync()!);
+              print('Introduce nombre del producto:');
+              String? nombre = stdin.readLineSync();
+              print('Introduce cantidad del producto:');
+              int? cantidad = int.parse(stdin.readLineSync()!);
+              print('Introduce precio del producto:');
+              double? precio = double.parse(stdin.readLineSync()!);
+
+
+              pManager.addProducto(id, nombre, cantidad, precio);
+              print('Producto introducido correctamente');
+          }catch(e)
+          {
+            print('Error al introducir un producto' + e.toString());
+          }
           break;
         case 2:
-          eliminarProducto();
+
           break;
         case 3:
-          actualizarProducto();
+
           break;
         case 4:
-          listarProductos();
+
           break;
         case 5:
-          buscarProducto();
+
           break;
         case 6:
           print('Saliendo del programa...');
@@ -47,21 +66,5 @@ void menu(){
       print('El input tiene que ser un numero');
     }
   }while(numero != 6);
-}
-
-void buscarProducto() {
-}
-
-void listarProductos() {
-}
-
-void actualizarProducto() {
-}
-
-void eliminarProducto() {
-}
-
-void agregarProducto() {
-  
 }
 
