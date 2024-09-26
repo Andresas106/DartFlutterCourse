@@ -24,23 +24,22 @@ void menu(){
       switch(numero)
       {
         case 1:
-          try{
+
               print('Introduce id del producto:');
-              int? id = int.parse(stdin.readLineSync()!);
+              String? id = stdin.readLineSync();
               print('Introduce nombre del producto:');
               String? nombre = stdin.readLineSync();
               print('Introduce cantidad del producto:');
-              int? cantidad = int.parse(stdin.readLineSync()!);
+              String? cantidad = stdin.readLineSync();
               print('Introduce precio del producto:');
-              double? precio = double.parse(stdin.readLineSync()!);
+              String? precio = stdin.readLineSync();
 
 
-              pManager.addProducto(id, nombre, cantidad, precio);
-              print('Producto introducido correctamente');
-          }catch(e)
-          {
-            print('Error al introducir un producto' + e.toString());
-          }
+              if(pManager.addProducto(id, nombre, cantidad, precio))
+                {
+                  print('Producto introducido correctamente');
+                }
+
           break;
         case 2:
 
