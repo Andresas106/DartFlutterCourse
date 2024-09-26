@@ -53,4 +53,11 @@ class ProductoManager {
       return false;
     }
   }
+
+  void listarProductos() {
+    if (productos.length == 0) print('No hay productos introducidos');
+    for (int i = 0; i < productos.length; i++) {
+      print(productos.elementAt(i).toString());
+    }
+  }
 }

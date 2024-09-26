@@ -48,7 +48,7 @@ void menu(){
 
           break;
         case 4:
-
+          pManager.listarProductos();
           break;
         case 5:
 

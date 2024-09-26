@@ -1,2 +1,2 @@
 # DartFlutterCourse
-That'sss how I learn Dart and Flutter
+This is a complete course that I'm doing with Flutter and Dart.
