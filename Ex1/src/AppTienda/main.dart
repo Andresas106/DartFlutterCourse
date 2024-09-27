@@ -42,7 +42,11 @@ void menu(){
 
           break;
         case 2:
-
+          print('Introduce el id del producto que quieres eliminar...');
+          String? id = stdin.readLineSync();
+          if(pManager.deleteProducto(id)){
+            print('Producto eliminado correctamente');
+          }
           break;
         case 3:
 

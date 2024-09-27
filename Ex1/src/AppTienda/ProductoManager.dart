@@ -11,8 +11,7 @@ class ProductoManager {
     return _instance;
   }
 
-  bool addProducto(
-      String? _id, String? _nombre, String? _cantidad, String? _precio) {
+  bool addProducto(String? _id, String? _nombre, String? _cantidad, String? _precio) {
     if (_id == null ||
         _nombre == null ||
         _cantidad == null ||
@@ -58,6 +57,28 @@ class ProductoManager {
     if (productos.length == 0) print('No hay productos introducidos');
     for (int i = 0; i < productos.length; i++) {
       print(productos.elementAt(i).toString());
+    }
+  }
+
+  bool deleteProducto(String? _id){
+
+    if(_id == null)
+      {
+        print("El valor del id no puede ser nulo");
+        return false;
+      }
+    try{
+      int id_parseado = int.parse(_id);
+      if(!productos.any((p) => p.id == id_parseado)){
+        print('Producto con id $id_parseado no encontrado');
+        return false;
+      }
+
+      productos.removeWhere((p) => p.id == id_parseado);
+      return true;
+    }catch(e){
+      print('El valor del id no es un numero');
+      return false;
     }
   }
 }
