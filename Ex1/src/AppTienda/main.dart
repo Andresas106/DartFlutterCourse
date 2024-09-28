@@ -49,13 +49,27 @@ void menu(){
           }
           break;
         case 3:
-
+          print('Introduce el id de producto a modificar');
+          String? id = stdin.readLineSync();
+          print('Introduce nuevo nombre de producto (opcional)');
+          String? nombre = stdin.readLineSync();
+          print('Introduce nueva cantidad de producto (opcional)');
+          String? cantidad = stdin.readLineSync();
+          print('Introduce nuevo precio de producto (opcional)');
+          String? precio = stdin.readLineSync();
+          if(pManager.modificarProducto(id, nombre, cantidad, precio)){
+            print('Producto modificado correctamente');
+          }
           break;
         case 4:
           pManager.listarProductos();
           break;
         case 5:
-
+          print('Introduce el id de producto a buscar (opcional)');
+          String? id = stdin.readLineSync();
+          print('Introduce el nombre de producto a buscar (opcional)');
+          String? nombre = stdin.readLineSync();
+          pManager.buscarProducto(id, nombre);
           break;
         case 6:
           print('Saliendo del programa...');

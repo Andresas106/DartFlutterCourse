@@ -81,4 +81,63 @@ class ProductoManager {
       return false;
     }
   }
+
+  bool modificarProducto(String? _id, String? _nombre, String? _cantidad, String? _precio)
+  {
+    if(_id == null)
+      {
+        print("El id proporcionado no puede ser nulo");
+        return false;
+      }
+    int id_parseado;
+    try{
+       id_parseado = int.parse(_id);
+    }catch(e){
+      print('El valor del id no es un numero');
+      return false;
+    }
+      // Encontrar el índice del producto en la lista
+      int index = productos.indexWhere((p) => p.id == id_parseado);
+
+      if (index == -1) {
+        print('Producto con id $id_parseado no encontrado');
+        return false;
+      }
+
+      var producto = productos[index];
+
+      if(_nombre != null && _nombre.isNotEmpty)
+        {
+          producto.nombre = _nombre;
+        }
+      
+      if(_cantidad != null && _cantidad.isNotEmpty)
+        {
+          try {
+            producto.cantidad = int.parse(_cantidad);
+          }catch(e)
+          {
+            print('Cantidad no es un numero');
+            return false;
+          }
+        }
+      
+      if(_precio != null && _precio.isNotEmpty)
+        {
+          try {
+            producto.precio = double.parse(_precio);
+          }catch(e)
+          {
+            print('Precio no es un numero decimal');
+            return false;
+          }
+        }
+      return true;
+
+  }
+
+  void buscarProducto(String? _id, String? _nombre)
+  {
+
+  }
 }
