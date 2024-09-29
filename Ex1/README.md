@@ -13,5 +13,3 @@ Este proyecto es un sistema de gestión de productos basado en consola que permi
 2. Asegurate de tener dart instalado en tu maquina. Puedes descargarlo en [dart.dev](https://dart.dev/get-dart/archive)
 3. Navega a la carpeta del proyecto en tu terminal.
 4. Ejecuta el archivo main.dart: `dart main.dart`.
-
-[Web project](https://www.influencetarget.com) as **Backend Developer.**
