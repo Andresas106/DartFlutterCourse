@@ -24,22 +24,18 @@ void menu(){
       switch(numero)
       {
         case 1:
-
-              print('Introduce id del producto:');
-              String? id = stdin.readLineSync();
-              print('Introduce nombre del producto:');
-              String? nombre = stdin.readLineSync();
-              print('Introduce cantidad del producto:');
-              String? cantidad = stdin.readLineSync();
-              print('Introduce precio del producto:');
-              String? precio = stdin.readLineSync();
-
-
-              if(pManager.addProducto(id, nombre, cantidad, precio))
-                {
-                  print('Producto introducido correctamente');
-                }
-
+          print('Introduce id del producto:');
+          String? id = stdin.readLineSync();
+          print('Introduce nombre del producto:');
+          String? nombre = stdin.readLineSync();
+          print('Introduce cantidad del producto:');
+          String? cantidad = stdin.readLineSync();
+          print('Introduce precio del producto:');
+          String? precio = stdin.readLineSync();
+          if(pManager.addProducto(id, nombre, cantidad, precio))
+            {
+              print('Producto introducido correctamente');
+            }
           break;
         case 2:
           print('Introduce el id del producto que quieres eliminar...');
@@ -65,18 +61,23 @@ void menu(){
           pManager.listarProductos();
           break;
         case 5:
-          print('Introduce el id de producto a buscar (opcional)');
-          String? id = stdin.readLineSync();
-          print('Introduce el nombre de producto a buscar (opcional)');
-          String? nombre = stdin.readLineSync();
-          pManager.buscarProducto(id, nombre);
+          print('Busca un producto (id o nombre)');
+          String? busqueda = stdin.readLineSync();
+          var productoBuscado = pManager.buscarProducto(busqueda);
+          if(productoBuscado.id == -1)
+            {
+              print('Productos no encontrados con el filtro dado');
+            }
+          else
+            {
+              print(productoBuscado.toString());
+            }
           break;
         case 6:
           print('Saliendo del programa...');
           break;
         default:
             print('Opcion no controlada');
-
       }
     }catch(e)
     {

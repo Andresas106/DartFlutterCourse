@@ -136,8 +136,22 @@ class ProductoManager {
 
   }
 
-  void buscarProducto(String? _id, String? _nombre)
+  Producto buscarProducto(String? _busqueda)
   {
+    if(_busqueda == null || _busqueda.isEmpty)
+      {
+        print('Debes proporcionar al menos un nombre o un id de producto');
+        return Producto(-1, "", 0, 0);
+      }
 
+    try{
+      int id_parseado = int.parse(_busqueda);
+      Producto producto = productos.firstWhere((p) => p.id == id_parseado, orElse: ()=> Producto(-1, "", 0, 0));
+      return producto;
+
+    }catch(e) {}
+
+    var producto = productos.firstWhere((p) => p.nombre == _busqueda, orElse: ()=> Producto(-1, "", 0, 0));
+    return producto;
   }
 }
