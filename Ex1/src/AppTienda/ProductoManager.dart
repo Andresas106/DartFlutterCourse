@@ -11,9 +11,8 @@ class ProductoManager {
     return _instance;
   }
 
-  bool addProducto(String? _id, String? _nombre, String? _cantidad, String? _precio) {
-    if (_id == null ||
-        _nombre == null ||
+  bool addProducto(int _id, String? _nombre, String? _cantidad, String? _precio) {
+    if (_nombre == null ||
         _cantidad == null ||
         _precio == null) {
       print('Un producto no  acepta nulos');
@@ -21,11 +20,10 @@ class ProductoManager {
     }
 
     try {
-      int id_parseado = int.parse(_id);
       int cantidad_parseado = int.parse(_cantidad);
       double precio_parseado = double.parse(_precio);
 
-      if (id_parseado <= 0 || cantidad_parseado <= 0 || precio_parseado <= 0) {
+      if (_id <= 0 || cantidad_parseado <= 0 || precio_parseado <= 0) {
         print('Id, cantidad y precio tienen que ser mayor a 0');
         return false;
       }
@@ -35,7 +33,7 @@ class ProductoManager {
         return false;
       }
 
-      Producto id_repetido = productos.firstWhere((p) => p.id == id_parseado,
+      Producto id_repetido = productos.firstWhere((p) => p.id == _id,
           orElse: () => Producto(-1, "", 0, 0));
 
       if (id_repetido.id != -1) {
@@ -44,7 +42,7 @@ class ProductoManager {
       }
 
       Producto p =
-          Producto(id_parseado, _nombre, cantidad_parseado, precio_parseado);
+          Producto(_id, _nombre, cantidad_parseado, precio_parseado);
       productos.add(p);
       return true;
     } catch (e) {

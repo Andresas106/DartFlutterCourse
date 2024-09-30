@@ -8,6 +8,7 @@ void main()
 }
 
 void menu(){
+  int _idCount = 0;
   var pManager = ProductoManager();
   int? numero;
   do {
@@ -24,15 +25,16 @@ void menu(){
       switch(numero)
       {
         case 1:
-          print('Introduce id del producto:');
-          String? id = stdin.readLineSync();
+  //        print('Introduce id del producto:');
+ //         String? id = stdin.readLineSync();
+          _idCount++;
           print('Introduce nombre del producto:');
           String? nombre = stdin.readLineSync();
           print('Introduce cantidad del producto:');
           String? cantidad = stdin.readLineSync();
           print('Introduce precio del producto:');
           String? precio = stdin.readLineSync();
-          if(pManager.addProducto(id, nombre, cantidad, precio))
+          if(pManager.addProducto(_idCount, nombre, cantidad, precio))
             {
               print('Producto introducido correctamente');
             }
