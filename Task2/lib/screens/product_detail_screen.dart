@@ -8,6 +8,11 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double discountPercentage = 0;
+    if (product.price < product.original_price) {
+      discountPercentage =
+          ((product.original_price - product.price) / product.original_price) * 100;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text(product.title),
@@ -34,6 +39,20 @@ class ProductDetailScreen extends StatelessWidget {
                     fontSize: 20, decoration: TextDecoration.lineThrough),
               )
               : Container(),
+              SizedBox(width: 10,),
+              product.price != product.original_price
+                  ? Container(
+                padding: EdgeInsets.all(2),
+                color: Colors.red,
+                child: Text(
+                  '-${discountPercentage.toStringAsFixed(0)}%',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                ),
+              ) : Container(),
 
             ],
           ),
