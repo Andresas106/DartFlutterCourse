@@ -15,7 +15,7 @@ final List<Product> dummyProducts = [
     description: 'Un bolso casual para el uso diario',
     price: 39.99,
     imagePath: 'assets/bolso2.png',
-      original_price: 50.19
+    original_price: 50.19
   ),
   Product(
     id: 'p3',
@@ -23,7 +23,7 @@ final List<Product> dummyProducts = [
     description: 'Bolso ideal para actividades deportivas',
     price: 29.99,
     imagePath: 'assets/bolso3.png',
-      original_price: 34.99
+    original_price: 34.99
   ),
   Product(
     id: 'p4',
@@ -31,7 +31,7 @@ final List<Product> dummyProducts = [
     description: 'Un bolso compacto y moderno',
     price: 19.99,
     imagePath: 'assets/bolso4.png',
-      original_price: 23.11
+    original_price: 23.11
   ),
   Product(
     id: 'p5',
