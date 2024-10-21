@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/product.dart';
 import '../screens/product_detail_screen.dart';
+import 'is_recommended_widget.dart';
+import 'original_price_widget.dart';
 
 class ProductItem extends StatelessWidget {
   final Product product;
@@ -61,30 +63,10 @@ class ProductItem extends StatelessWidget {
                   children: [
                     Text('\$${product.price}'),
                     SizedBox(width: 10,),
-                    product.price != product.original_price
-
-                    ? Text('\$${product.original_price}',
-                    style: TextStyle(decoration: TextDecoration.lineThrough),)
-                    : Container(),
+                    PricesBadge(product.original_price, product.price, 14)
                   ],
                 ),
-                product.isRecommended
-                ? Container(
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                      color: Colors.lightGreen,
-                      borderRadius: BorderRadius.circular(20)
-                  ),
-                  child: Text(
-                    'Recommended',
-                    style: TextStyle(
-                      color: Colors.green[900],
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
-                )
-                : Container(),
+                RecommendedBadge(product.isRecommended, 12)
               ],
             )
           ],
