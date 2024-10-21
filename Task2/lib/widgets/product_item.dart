@@ -67,7 +67,24 @@ class ProductItem extends StatelessWidget {
                     style: TextStyle(decoration: TextDecoration.lineThrough),)
                     : Container(),
                   ],
+                ),
+                product.isRecommended
+                ? Container(
+                  padding: EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                      color: Colors.lightGreen,
+                      borderRadius: BorderRadius.circular(20)
+                  ),
+                  child: Text(
+                    'Recommended',
+                    style: TextStyle(
+                      color: Colors.green[900],
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
                 )
+                : Container(),
               ],
             )
           ],

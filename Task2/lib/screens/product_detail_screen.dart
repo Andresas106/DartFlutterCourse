@@ -21,6 +21,21 @@ class ProductDetailScreen extends StatelessWidget {
         children: [
           Image.asset(product.imagePath),
           SizedBox(height: 10),
+          product.isRecommended
+          ? Container(
+            padding: EdgeInsets.all(6),
+            decoration: BoxDecoration(
+                color: Colors.lightGreen,
+                borderRadius: BorderRadius.circular(20)
+            ),
+            child: Text('Recommended',
+            style: TextStyle(
+                color: Colors.green[900],
+                fontWeight: FontWeight.bold,
+                fontSize: 16
+            )),
+          ) : Container(),
+          SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -49,7 +64,7 @@ class ProductDetailScreen extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 12,
+                    fontSize: 17,
                   ),
                 ),
               ) : Container(),
