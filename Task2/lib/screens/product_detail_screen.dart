@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task2/widgets/buildStars.dart';
 import 'package:task2/widgets/is_recommended_widget.dart';
 import 'package:task2/widgets/original_price_widget.dart';
 import '../models/product.dart';
@@ -24,6 +25,8 @@ class ProductDetailScreen extends StatelessWidget {
           Image.asset(product.imagePath),
           SizedBox(height: 10),
           RecommendedBadge(product.isRecommended, 17),
+          SizedBox(height: 10,),
+          buildStars(product.rating),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -38,8 +41,8 @@ class ProductDetailScreen extends StatelessWidget {
               SizedBox(width: 10,),
               PricesBadge(product.original_price, product.price, 20),
               SizedBox(width: 10,),
-              product.price != product.original_price
-                  ? Container(
+              if(product.price != product.original_price)
+               Container(
                 padding: EdgeInsets.all(2),
                 color: Colors.red,
                 child: Text(
@@ -50,8 +53,7 @@ class ProductDetailScreen extends StatelessWidget {
                     fontSize: 17,
                   ),
                 ),
-              ) : Container(),
-
+              )
             ],
           ),
           SizedBox(height: 10),

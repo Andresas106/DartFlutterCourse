@@ -6,6 +6,7 @@ class Product {
   final double _original_price;
   final String _imagePath;
   final bool _isRecommended;
+  final double _rating;
 
   Product({
     required String id,
@@ -15,13 +16,15 @@ class Product {
     required double price,
     required String imagePath,
     required bool isRecommended,
+    required double rating
   })  : _id = id,
         _title = title,
         _description = description,
         _original_price = original_price,
         _price = price,
         _imagePath = imagePath,
-        _isRecommended = isRecommended;
+        _isRecommended = isRecommended,
+        _rating = rating;
 
   String get id => _id;
   String get title => _title;
@@ -30,4 +33,5 @@ class Product {
   double get price => _price;
   String get imagePath => _imagePath;
   bool get isRecommended => _isRecommended;
+  double get rating => _rating;
 }
