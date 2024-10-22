@@ -5,7 +5,7 @@ Este proyecto es un sistema de gestión de productos basado en Flutter que permi
 
 - **Recomendado**: Se ha añadido la etiqueta de recomendado para cada producto (no todos los productos tienen la etiqueta).
 - **Descuento**: descuentos de precios con el precio original tachado (no todos los productos tienen descuento).
-- **Valoracion**:Estrellas de valoracion para cada producto.
+- **Valoracion**: Estrellas de valoracion para cada producto.
 - **Cambio de lista**: Se ha cambiado el tipo de lista por defecto de la plantilla al mostrar la lista de productos.
 
 
