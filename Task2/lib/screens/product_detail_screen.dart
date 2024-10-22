@@ -41,7 +41,7 @@ class ProductDetailScreen extends StatelessWidget {
               SizedBox(width: 10,),
               PricesBadge(product.original_price, product.price, 20),
               SizedBox(width: 10,),
-              if(product.price != product.original_price)
+              if(discountPercentage > 0)
                Container(
                 padding: EdgeInsets.all(2),
                 color: Colors.red,
