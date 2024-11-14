@@ -31,7 +31,9 @@ class AppRouterDelegate extends RouterDelegate<RouteSettings>
       pages: [
         //TODO Tasca 3 - Implemetar Navigator 2.0
         MaterialPage(key: ValueKey('IntroScreen'),
-            child: IntroScreen())
+            child: IntroScreen()),
+        if(_currentRoute?.name == '/login')
+          MaterialPage(key: ValueKey('LoginScreen'),child: LoginScreen())
       ],
       onPopPage: (route, result) {
         if (!route.didPop(result)) {

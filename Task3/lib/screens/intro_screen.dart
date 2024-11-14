@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class IntroScreen extends StatefulWidget {
+
   const IntroScreen({super.key});
 
   @override
@@ -22,6 +23,7 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+
 
     return Scaffold(
       body: Stack(
@@ -60,6 +62,8 @@ class _IntroScreenState extends State<IntroScreen> {
 
                     //TODO Tasca 3 - Implemetar Navigator 2.0
                     //Ir a la pantalla de login_screen.dart
+                    final routerDelegate = Router.of(context).routerDelegate;
+                    routerDelegate.setNewRoutePath(RouteSettings(name: '/login'));
 
                   },
                   child: Text(
@@ -80,6 +84,7 @@ class _IntroScreenState extends State<IntroScreen> {
 
                     //TODO Tasca 3 - Implemetar Navigator 2.0
                     //Ir a la pantalla de product_list_screen.dart
+
 
                   },
                   child: Text(
