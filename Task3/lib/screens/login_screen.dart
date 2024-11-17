@@ -18,6 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
       //TODO Tasca 3 - Implemetar Navigator 2.0
       //Ir a la pantalla de ProductListScreen()
+      final routerDelegate = Router.of(context).routerDelegate;
+      routerDelegate.setNewRoutePath(RouteSettings(name: '/products'));
 
     } else {
       showDialog(
@@ -32,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 {
                   //TODO Tasca 3 - Implemetar Navigator 2.0
                   //Quitar el AlertDialog de la pila
-
+                  Navigator.pop(context);
                 },
                 child: Text('OK'),
               ),

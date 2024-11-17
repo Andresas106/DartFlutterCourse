@@ -84,7 +84,8 @@ class _IntroScreenState extends State<IntroScreen> {
 
                     //TODO Tasca 3 - Implemetar Navigator 2.0
                     //Ir a la pantalla de product_list_screen.dart
-
+                    final routerDelegate = Router.of(context).routerDelegate;
+                    routerDelegate.setNewRoutePath(RouteSettings(name: '/products'));
 
                   },
                   child: Text(

@@ -84,11 +84,12 @@ class ProductDetailScreen extends StatelessWidget {
               style: FilledButton.styleFrom(
                 minimumSize: const Size(double.infinity, 48.0),
               ),
-              onPressed: () =>
+              onPressed: ()
               {
 
                 //TODO Tasca 3 - Implemetar Navigator 2.0
                 //Volver a la pantalla de product_list_screen
+                Navigator.pop(context);
 
               },
               child: Text(

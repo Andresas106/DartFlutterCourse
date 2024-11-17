@@ -49,11 +49,13 @@ class ProductListScreen extends StatelessWidget {
               style: FilledButton.styleFrom(
                 minimumSize: const Size(double.infinity, 48.0),
               ),
-              onPressed: () =>
+              onPressed: ()
               {
                 //TODO Tasca 3 - Implemetar Navigator 2.0
                 //Ir a la pantalla login_screen.dart
 
+                final routerDelegate = Router.of(context).routerDelegate;
+                routerDelegate.setNewRoutePath(RouteSettings(name: '/login'));
               },
               child: Text(
                 'Logout',
