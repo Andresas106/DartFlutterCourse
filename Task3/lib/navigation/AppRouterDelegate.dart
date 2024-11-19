@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:task2/models/product.dart';
+import 'package:task2/screens/product_detail_screen.dart';
 import 'package:task2/screens/product_list_screen.dart';
 
 import '../screens/intro_screen.dart';
@@ -31,12 +33,14 @@ class AppRouterDelegate extends RouterDelegate<RouteSettings>
       key: navigatorKey,
       pages: [
         //TODO Tasca 3 - Implemetar Navigator 2.0
-        MaterialPage(key: ValueKey('IntroScreen'),
+        CustomTransitionPage(key: ValueKey('IntroScreen'),
             child: IntroScreen()),
         if(_currentRoute?.name == '/login')
-          MaterialPage(key: ValueKey('LoginScreen'),child: LoginScreen()),
+          CustomTransitionPage(key: ValueKey('LoginScreen'),child: LoginScreen()),
         if(_currentRoute?.name == '/products')
-          MaterialPage(key: ValueKey('ProductsScreen'),child: ProductListScreen()),
+          CustomTransitionPage(key: ValueKey('ProductsScreen'),child: ProductListScreen()),
+        if(_currentRoute?.name == '/productDetail')
+          CustomTransitionPage(key: ValueKey('ProductDetailScreen'), child: ProductDetailScreen(_currentRoute!.arguments as Product)),
       ],
       onPopPage: (route, result) {
         if (!route.didPop(result)) {
@@ -45,6 +49,23 @@ class AppRouterDelegate extends RouterDelegate<RouteSettings>
         _setNewRoutePath(RouteSettings(name: '/'));
         return true;
       },
+    );
+  }
+}
+
+class CustomTransitionPage extends Page {
+  final Widget child;
+
+  CustomTransitionPage({required LocalKey key,required  this.child})
+  : super(key: key);
+  @override
+  Route createRoute(BuildContext context) {
+    return PageRouteBuilder(
+        settings: this,
+        pageBuilder: (context, animation, secondaryAnimation) => child,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child,);
+        }
     );
   }
 }

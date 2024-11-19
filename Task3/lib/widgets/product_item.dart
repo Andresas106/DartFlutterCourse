@@ -12,11 +12,8 @@ class ProductItem extends StatelessWidget {
   {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (ctx) => ProductDetailScreen(product),
-          ),
-        );
+        final routerDelegate = Router.of(context).routerDelegate;
+        routerDelegate.setNewRoutePath(RouteSettings(name: '/productDetail', arguments: product));
       },
       child: Container(
         decoration: BoxDecoration(
