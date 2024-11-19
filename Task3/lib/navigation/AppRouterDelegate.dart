@@ -46,7 +46,20 @@ class AppRouterDelegate extends RouterDelegate<RouteSettings>
         if (!route.didPop(result)) {
           return false;
         }
-        _setNewRoutePath(RouteSettings(name: '/'));
+
+        if(_currentRoute?.name == '/productDetail')
+          {
+            _setNewRoutePath(RouteSettings(name: '/products'));
+          }
+        else if(_currentRoute?.name == '/products')
+          {
+            _setNewRoutePath(RouteSettings(name: '/login'));
+          }
+        else
+          {
+            _setNewRoutePath(RouteSettings(name: '/'));
+          }
+
         return true;
       },
     );
