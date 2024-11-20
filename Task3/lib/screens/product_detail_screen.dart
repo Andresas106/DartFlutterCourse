@@ -23,57 +23,59 @@ class ProductDetailScreen extends StatelessWidget {
 
           ),
           SingleChildScrollView(
-            child: Column(
-              children: [
-                Image.asset(
-                  product.imagePath,
-                  width: 300, // Cambia este valor al tamaño deseado
-                  height: 300, // Cambia este valor al tamaño deseado
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  '\$${product.price.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                    color: Colors.green,
-                    fontSize: 22,
+            child: Center(
+              child: Column(
+                children: [
+                  Image.asset(
+                    product.imagePath,
+                    width: 300, // Cambia este valor al tamaño deseado
+                    height: 300, // Cambia este valor al tamaño deseado
+                    fit: BoxFit.cover,
+                    alignment: Alignment.center,
                   ),
-                ),
-                Text(
-                  '\$${product.originalPrice.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 18,
-                    decoration: TextDecoration.lineThrough,
-                  ),
-                ),
-                Text(
-                  '-${product.discountPercentage.toStringAsFixed(0)}%',
-                  style: TextStyle(fontSize: 18, color: Colors.yellow[700]),
-                ),
-                if (product.isRecommended)
-                  const Text(
-                    'Producto recomendado',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.blueAccent,
+                  const SizedBox(height: 10),
+                  Text(
+                    '\$${product.price.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      color: Colors.green,
+                      fontSize: 22,
                     ),
                   ),
-                Text(
-                  'Valoración: ${product.rating.toStringAsFixed(1)}/5',
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
-                ),
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    product.description,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 16),
+                  Text(
+                    '\$${product.originalPrice.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 18,
+                      decoration: TextDecoration.lineThrough,
+                    ),
                   ),
-                ),
-              ],
+                  Text(
+                    '-${product.discountPercentage.toStringAsFixed(0)}%',
+                    style: TextStyle(fontSize: 18, color: Colors.yellow[700]),
+                  ),
+                  if (product.isRecommended)
+                    const Text(
+                      'Producto recomendado',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+                  Text(
+                    'Valoración: ${product.rating.toStringAsFixed(1)}/5',
+                    style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      product.description,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ],
+              )
             ),
           ),
           Positioned(
