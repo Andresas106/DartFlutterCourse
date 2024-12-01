@@ -1,22 +1,50 @@
 import 'package:flutter/material.dart';
+import '../local_persistence/FavoritesManager.dart';
 import '../models/product.dart';
 import '../screens/product_detail_screen.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends StatefulWidget {
   final Product product;
 
   const ProductItem(this.product, {super.key});
 
   @override
+  _ProductItemState createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
+  bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavoriteStatus();
+  }
+
+  Future<void> _loadFavoriteStatus() async {
+    isFavorite = await FavoritesManager.isFavorite(widget.product.id);
+    setState(() {});
+  }
+
+  Future<void> _toggleFavorite() async {
+    await FavoritesManager.toggleFavorite(widget.product.id);
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
+
+  @override
   Widget build(BuildContext context)
   {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
+      onTap: () async {
+        bool? isFavoriteChanged = await Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (ctx) => ProductDetailScreen(product),
+            builder: (ctx) => ProductDetailScreen(widget.product),
           ),
         );
+
+        if(isFavoriteChanged != null && isFavoriteChanged) _loadFavoriteStatus();
       },
       child: Container(
         decoration: BoxDecoration(
@@ -35,7 +63,7 @@ class ProductItem extends StatelessWidget {
                       topRight: Radius.circular(10),
                     ),
                     child: Image.asset(
-                      product.imagePath,
+                      widget.product.imagePath,
                       fit: BoxFit.cover,
                       width: double.infinity,
                     ),
@@ -44,7 +72,7 @@ class ProductItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    product.title,
+                    widget.product.title,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
@@ -56,7 +84,7 @@ class ProductItem extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        '\$${product.originalPrice}',
+                        '\$${widget.product.originalPrice}',
                         style: const TextStyle(
                           decoration: TextDecoration.lineThrough,
                           color: Colors.grey,
@@ -64,7 +92,7 @@ class ProductItem extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        '\$${product.price}',
+                        '\$${widget.product.price}',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.teal,
@@ -76,7 +104,7 @@ class ProductItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    '-${((1 - (product.price / product.originalPrice)) * 100).toStringAsFixed(0)}%',
+                    '-${((1 - (widget.product.price / widget.product.originalPrice)) * 100).toStringAsFixed(0)}%',
                     style: const TextStyle(
                       fontSize: 12,
                       color: Colors.grey,
@@ -85,7 +113,7 @@ class ProductItem extends StatelessWidget {
                 ),
               ],
             ),
-            if (product.isRecommended)
+            if (widget.product.isRecommended)
               Positioned(
                 top: 8,
                 left: 8,
@@ -102,10 +130,18 @@ class ProductItem extends StatelessWidget {
                 ),
               ),
             Positioned(
+              top: 8,
+              right: 8,
+              child: IconButton(
+                  onPressed: _toggleFavorite,
+                  icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border, color: isFavorite ? Colors.red : Colors.grey)
+              ),
+            ),
+            Positioned(
               bottom: 8,
               right: 8,
               child: Text(
-                '${product.rating}/5',
+                '${widget.product.rating}/5',
                 style: const TextStyle(
                   fontSize: 20,
                   color: Colors.black87,
@@ -117,4 +153,8 @@ class ProductItem extends StatelessWidget {
       ),
     );
   }
+
 }
+
+
+

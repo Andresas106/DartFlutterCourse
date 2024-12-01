@@ -1,24 +1,58 @@
 import 'package:flutter/material.dart';
+import '../local_persistence/FavoritesManager.dart';
 import '../models/product.dart';
 import 'package:task2/navigation/AppRouterDelegate.dart';
 
 
-class ProductDetailScreen extends StatelessWidget {
+class ProductDetailScreen extends StatefulWidget {
   final Product product;
 
   const ProductDetailScreen(this.product, {super.key});
 
   @override
-  Widget build(BuildContext context) {
+  _ProductDetailScreenState createState() => _ProductDetailScreenState();
+}
 
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavoriteStatus();
+  }
+
+  Future<void> _loadFavoriteStatus() async {
+    isFavorite = await FavoritesManager.isFavorite(widget.product.id);
+    setState(() {});
+  }
+
+  Future<void> _toggleFavorite() async {
+    await FavoritesManager.toggleFavorite(widget.product.id);
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+    Navigator.of(context).pop(true); // Indica que el favorito ha cambiado
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(product.title,style: const TextStyle(color: Colors.white,
-            fontWeight: FontWeight.bold,)),
-          backgroundColor: Colors.deepPurple,
-        ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(widget.product.title,style: const TextStyle(color: Colors.white,
+          fontWeight: FontWeight.bold,)),
+        actions: [
+          IconButton(
+            icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: isFavorite ? Colors.red : Colors.white,
+          ),
+            onPressed: _toggleFavorite)
+        ],
+        backgroundColor: Colors.deepPurple,
+      ),
       body: Stack(
         children: [
           Container(
@@ -28,7 +62,7 @@ class ProductDetailScreen extends StatelessWidget {
             child: Column(
               children: [
                 Image.asset(
-                  product.imagePath,
+                  widget.product.imagePath,
                   width: 300, // Cambia este valor al tamaño deseado
                   height: 300, // Cambia este valor al tamaño deseado
                   fit: BoxFit.cover,
@@ -36,14 +70,14 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  '\$${product.price.toStringAsFixed(2)}',
+                  '\$${widget.product.price.toStringAsFixed(2)}',
                   style: const TextStyle(
                     color: Colors.green,
                     fontSize: 22,
                   ),
                 ),
                 Text(
-                  '\$${product.originalPrice.toStringAsFixed(2)}',
+                  '\$${widget.product.originalPrice.toStringAsFixed(2)}',
                   style: const TextStyle(
                     color: Colors.red,
                     fontSize: 18,
@@ -51,10 +85,10 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '-${product.discountPercentage.toStringAsFixed(0)}%',
+                  '-${widget.product.discountPercentage.toStringAsFixed(0)}%',
                   style: TextStyle(fontSize: 18, color: Colors.yellow[700]),
                 ),
-                if (product.isRecommended)
+                if (widget.product.isRecommended)
                   const Text(
                     'Producto recomendado',
                     style: TextStyle(
@@ -63,14 +97,14 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                   ),
                 Text(
-                  'Valoración: ${product.rating.toStringAsFixed(1)}/5',
+                  'Valoración: ${widget.product.rating.toStringAsFixed(1)}/5',
                   style: const TextStyle(fontSize: 16, color: Colors.black54),
                 ),
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    product.description,
+                    widget.product.description,
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 16),
                   ),
@@ -87,8 +121,8 @@ class ProductDetailScreen extends StatelessWidget {
                 minimumSize: const Size(double.infinity, 48.0),
               ),
               onPressed:()
-            {
-              Navigator.of(context).pop();
+              {
+                Navigator.of(context).pop();
               },
               child: Text(
                 'Back',
@@ -99,9 +133,8 @@ class ProductDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-        ],
+        ]
       ),
     );
   }
 }
-
