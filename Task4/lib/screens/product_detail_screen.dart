@@ -32,7 +32,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     setState(() {
       isFavorite = !isFavorite;
     });
-    Navigator.of(context).pop(true); // Indica que el favorito ha cambiado
+    //Navigator.of(context).pop(true); // Indica que el favorito ha cambiado
   }
 
   @override
@@ -122,7 +122,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
               onPressed:()
               {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(true);
               },
               child: Text(
                 'Back',
