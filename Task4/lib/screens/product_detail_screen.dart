@@ -3,7 +3,6 @@ import '../local_persistence/FavoritesManager.dart';
 import '../models/product.dart';
 import 'package:task2/navigation/AppRouterDelegate.dart';
 
-
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
 
@@ -35,29 +34,37 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     //Navigator.of(context).pop(true); // Indica que el favorito ha cambiado
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pop(true);
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(widget.product.title,style: const TextStyle(color: Colors.white,
-          fontWeight: FontWeight.bold,)),
-        actions: [
-          IconButton(
-            icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,
-            color: isFavorite ? Colors.red : Colors.white,
-          ),
-            onPressed: _toggleFavorite)
-        ],
-        backgroundColor: Colors.deepPurple,
-      ),
-      body: Stack(
-        children: [
-          Container(
-
-          ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(widget.product.title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              )),
+          actions: [
+            IconButton(
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite ? Colors.red : Colors.white,
+                ),
+                onPressed: _toggleFavorite)
+          ],
+          backgroundColor: Colors.deepPurple,
+        ),
+        body: Stack(children: [
+          Container(),
           SingleChildScrollView(
             child: Column(
               children: [
@@ -120,8 +127,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               style: FilledButton.styleFrom(
                 minimumSize: const Size(double.infinity, 48.0),
               ),
-              onPressed:()
-              {
+              onPressed: () {
                 Navigator.of(context).pop(true);
               },
               child: Text(
@@ -133,7 +139,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
           ),
-        ]
+        ]),
       ),
     );
   }

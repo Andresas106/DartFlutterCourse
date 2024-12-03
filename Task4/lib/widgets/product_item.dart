@@ -24,6 +24,7 @@ class _ProductItemState extends State<ProductItem> {
   Future<void> _loadFavoriteStatus() async {
     isFavorite = await FavoritesManager.isFavorite(widget.product.id);
     setState(() {});
+
   }
 
   Future<void> _toggleFavorite() async {

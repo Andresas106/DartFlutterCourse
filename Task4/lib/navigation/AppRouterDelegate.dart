@@ -58,6 +58,8 @@ class AppRouterDelegate extends RouterDelegate<RouteSettings>
         if (!route.didPop(result)) {
           return false;
         }
+
+
         _setNewRoutePath(RouteSettings(name: '/'));
         return true;
       },
