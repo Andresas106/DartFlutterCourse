@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task2/local_persistence/LanguageManager.dart';
 import 'package:task2/screens/product_list_screen.dart';
 import 'package:task2/navigation/AppRouterDelegate.dart';
 
@@ -24,8 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Login Failed'),
-            content: Text('Invalid username or password. Please try again.'),
+            title: Text('${LanguageManager().translate('login_failed')}'),
+            content: Text('${LanguageManager().translate('invalid')}'),
             actions: [
               TextButton(
                 onPressed: ()
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   //Quitar el AlertDialog de la pila
 
                 },
-                child: Text('OK'),
+                child: Text('${LanguageManager().translate('ok')}'),
               ),
             ],
           );
@@ -69,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextField(
                   controller: _usernameController,
                   decoration: InputDecoration(
-                    labelText: 'Username',
+                    labelText: '${LanguageManager().translate('username')}',
                     border: OutlineInputBorder(),
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.8),
@@ -80,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: '${LanguageManager().translate('password')}',
                     border: OutlineInputBorder(),
                     filled: true,
                     fillColor: Colors.white.withOpacity(0.8),
@@ -94,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   onPressed: () => _validateAndLogin(context),
                   child: Text(
-                    'Login',
+                    '${LanguageManager().translate('login')}',
                     style: textTheme.titleMedium!.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

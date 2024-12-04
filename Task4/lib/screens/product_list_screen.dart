@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task2/local_persistence/LanguageManager.dart';
 import '../data/dummy_data.dart';
 import '../widgets/product_item.dart';
 import 'package:task2/navigation/AppRouterDelegate.dart';
@@ -13,7 +14,7 @@ class ProductListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Lista de Productos',style: TextStyle(color: Colors.white,
+        title:  Text('${LanguageManager().translate('products')}',style: TextStyle(color: Colors.white,
           fontWeight: FontWeight.bold,)),
         backgroundColor: Colors.deepPurple,
       ),
@@ -56,7 +57,7 @@ class ProductListScreen extends StatelessWidget {
                 routerDelegate.setNewRoutePath(RouteSettings(name: '/'));
               },
               child: Text(
-                'Logout',
+                '${LanguageManager().translate('logout')}',
                 style: textTheme.titleMedium!.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

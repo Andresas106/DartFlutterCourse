@@ -11,7 +11,7 @@
     "products": "List of products",
     "recommended": "Recommended",
     "product_recommended": "Recommended product",
-    "valoration": "Rating",
+    "rating": "Rating",
     "back": "Back",
     "logout": "Logout",
     "language": "Language",
@@ -21,7 +21,7 @@
     "sort_products": "Sort Products",
     "sort_by_alphabetic": "Alphabetic",
     "sort_by_price": "Price",
-    "sort_by_valoration": "Rating",
+    "sort_by_rating": "Rating",
     "sort_by_favorite": "Favorites"
   },
   "es": {
@@ -36,7 +36,7 @@
     "products": "Lista de Productos",
     "recommended": "Recomendado",
     "product_recommended": "Producto Recomendado",
-    "valoration": "Valoración",
+    "rating": "Valoración",
     "back": "Atras",
     "logout": "Cerrar Sesión",
     "language": "Idioma",
@@ -46,7 +46,7 @@
     "sort_products": "Ordenar Productos",
     "sort_by_alphabetic": "Alfabeticamente",
     "sort_by_price": "Precio",
-    "sort_by_valoration": "Valoración",
+    "sort_by_rating": "Valoración",
     "sort_by_favorite": "Favoritos"
   }
 }

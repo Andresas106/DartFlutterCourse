@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task2/local_persistence/LanguageManager.dart';
 import '../local_persistence/FavoritesManager.dart';
 import '../models/product.dart';
 import '../screens/product_detail_screen.dart';
@@ -124,8 +125,8 @@ class _ProductItemState extends State<ProductItem> {
                     color: Colors.grey[400],
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: const Text(
-                    'Recomendado',
+                  child: Text(
+                    '${LanguageManager().translate('recommended')}',
                     style: TextStyle(fontSize: 10, color: Colors.black87),
                   ),
                 ),

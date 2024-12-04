@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../local_persistence/LanguageManager.dart';
 import '../local_persistence/FavoritesManager.dart';
 import '../models/product.dart';
-import 'package:task2/navigation/AppRouterDelegate.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
@@ -96,15 +96,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   style: TextStyle(fontSize: 18, color: Colors.yellow[700]),
                 ),
                 if (widget.product.isRecommended)
-                  const Text(
-                    'Producto recomendado',
+                   Text(
+                    '${LanguageManager().translate('product_recommended')}',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.blueAccent,
                     ),
                   ),
                 Text(
-                  'Valoración: ${widget.product.rating.toStringAsFixed(1)}/5',
+                  '${LanguageManager().translate('rating')}: ${widget.product.rating.toStringAsFixed(1)}/5',
                   style: const TextStyle(fontSize: 16, color: Colors.black54),
                 ),
                 const SizedBox(height: 10),
@@ -131,7 +131,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 Navigator.of(context).pop(true);
               },
               child: Text(
-                'Back',
+                '${LanguageManager().translate('back')}',
                 style: textTheme.titleMedium!.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
