@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:task2/local_persistence/FilterManager.dart';
 import 'package:task2/local_persistence/LanguageManager.dart';
 
 import 'package:task2/navigation/AppRouterDelegate.dart';
@@ -19,6 +20,8 @@ class _IntroScreenState extends State<IntroScreen> {
   void initState() {
     super.initState();
     _loadLanguage();
+    FilterManager().loadFilter();
+
   }
 
   Future<void> _loadLanguage() async {
