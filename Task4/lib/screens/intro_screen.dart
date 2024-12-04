@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:task2/local_persistence/LanguageManager.dart';
 
 import 'package:task2/navigation/AppRouterDelegate.dart';
 import 'package:task2/screens/login_screen.dart';
@@ -16,7 +18,21 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   void initState() {
     super.initState();
+    _loadLanguage();
   }
+
+  Future<void> _loadLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      String language = prefs.getString('language') ?? 'en';
+      LanguageManager().loadTranslations(language);
+    });
+  }
+
+  /*Future<void> _saveLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('language', LanguageManager().currentLanguage);
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +53,8 @@ class _IntroScreenState extends State<IntroScreen> {
             left: 16.0,
             right: 16.0,
             child: Text(
-              '\nShopping Application',
+              '\n${LanguageManager().translate('title')}',
+              //'\nShopping Application',
               textAlign: TextAlign.center,
               style: textTheme.displayLarge!.copyWith(
                 color: Colors.white,
@@ -61,7 +78,7 @@ class _IntroScreenState extends State<IntroScreen> {
                     routerDelegate.setNewRoutePath(RouteSettings(name: '/login'));
                   },
                   child: Text(
-                    'Login',
+                    '${LanguageManager().translate('login')}',
                     style: textTheme.titleMedium!.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -80,7 +97,7 @@ class _IntroScreenState extends State<IntroScreen> {
 
                   },
                   child: Text(
-                    'Shop as a Guest',
+                    '${LanguageManager().translate('guest')}',
                     style: textTheme.titleMedium!.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
