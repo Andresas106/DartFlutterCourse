@@ -7,6 +7,7 @@ class Product {
   final double _originalPrice;
   final bool _isRecommended;
   final double _rating;
+  bool _isFavorite;
 
   Product({
     required String id,
@@ -17,6 +18,7 @@ class Product {
     required double originalPrice,
     bool isRecommended = false,
     double rating = 0.0,
+    bool isFavorite = false
   })  : _id = id,
         _title = title,
         _description = description,
@@ -24,7 +26,8 @@ class Product {
         _imagePath = imagePath,
         _originalPrice = originalPrice,
         _isRecommended = isRecommended,
-        _rating = rating;
+        _rating = rating,
+        _isFavorite = isFavorite;
 
   String get id => _id;
   String get title => _title;
@@ -33,6 +36,9 @@ class Product {
   String get imagePath => _imagePath;
   double get originalPrice => _originalPrice;
   bool get isRecommended => _isRecommended;
+  bool get isFavorite => _isFavorite;
   double get discountPercentage => (((originalPrice - price) / originalPrice) * 100 );
   double get rating => _rating;
+
+  set isFavorite(bool value) => _isFavorite = value;
 }

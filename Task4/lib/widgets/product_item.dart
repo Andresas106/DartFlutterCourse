@@ -14,25 +14,16 @@ class ProductItem extends StatefulWidget {
 }
 
 class _ProductItemState extends State<ProductItem> {
-  bool isFavorite = false;
 
   @override
   void initState() {
     super.initState();
-    _loadFavoriteStatus();
   }
 
-  Future<void> _loadFavoriteStatus() async {
-    isFavorite = await FavoritesManager.isFavorite(widget.product.id);
+  Future<void> _toggleFavorite(Product product) async {
+    product.isFavorite = !product.isFavorite;
+    await FavoritesManager.toggleFavorite(product.id);
     setState(() {});
-
-  }
-
-  Future<void> _toggleFavorite() async {
-    await FavoritesManager.toggleFavorite(widget.product.id);
-    setState(() {
-      isFavorite = !isFavorite;
-    });
   }
 
   @override
@@ -45,8 +36,6 @@ class _ProductItemState extends State<ProductItem> {
             builder: (ctx) => ProductDetailScreen(widget.product),
           ),
         );
-
-        if(isFavoriteChanged != null && isFavoriteChanged) _loadFavoriteStatus();
       },
       child: Container(
         decoration: BoxDecoration(
@@ -135,8 +124,8 @@ class _ProductItemState extends State<ProductItem> {
               top: 8,
               right: 8,
               child: IconButton(
-                  onPressed: _toggleFavorite,
-                  icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border, color: isFavorite ? Colors.red : Colors.grey)
+                  onPressed: () => _toggleFavorite(widget.product),
+                  icon: Icon(widget.product.isFavorite ? Icons.favorite : Icons.favorite_border, color: widget.product.isFavorite ? Colors.red : Colors.grey)
               ),
             ),
             Positioned(

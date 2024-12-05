@@ -13,25 +13,17 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  bool isFavorite = false;
 
   @override
   void initState() {
     super.initState();
-    _loadFavoriteStatus();
+
   }
 
-  Future<void> _loadFavoriteStatus() async {
-    isFavorite = await FavoritesManager.isFavorite(widget.product.id);
+  Future<void> _toggleFavorite(Product product) async {
+    product.isFavorite = !product.isFavorite;
+    await FavoritesManager.toggleFavorite(product.id);
     setState(() {});
-  }
-
-  Future<void> _toggleFavorite() async {
-    await FavoritesManager.toggleFavorite(widget.product.id);
-    setState(() {
-      isFavorite = !isFavorite;
-    });
-    //Navigator.of(context).pop(true); // Indica que el favorito ha cambiado
   }
 
   Future<bool> _onWillPop() async {
@@ -56,10 +48,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           actions: [
             IconButton(
                 icon: Icon(
-                  isFavorite ? Icons.favorite : Icons.favorite_border,
-                  color: isFavorite ? Colors.red : Colors.white,
+                  widget.product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: widget.product.isFavorite ? Colors.red : Colors.white,
                 ),
-                onPressed: _toggleFavorite)
+                onPressed: () => _toggleFavorite(widget.product))
           ],
           backgroundColor: Colors.deepPurple,
         ),
