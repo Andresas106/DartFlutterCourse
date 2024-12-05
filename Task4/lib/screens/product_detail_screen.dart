@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task2/local_persistence/ConfigurationScreen.dart';
 import '../local_persistence/LanguageManager.dart';
 import '../local_persistence/FavoritesManager.dart';
 import '../models/product.dart';
@@ -27,7 +28,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   Future<bool> _onWillPop() async {
-    Navigator.of(context).pop(true);
+    Navigator.of(context).pop(widget.product.isFavorite);
     return false;
   }
 
@@ -46,6 +47,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 fontWeight: FontWeight.bold,
               )),
           actions: [
+            IconButton(onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => ConfigurationScreen(),
+                  ),
+              );
+            }, icon: Icon(Icons.settings, color: Colors.white,)),
             IconButton(
                 icon: Icon(
                   widget.product.isFavorite ? Icons.favorite : Icons.favorite_border,

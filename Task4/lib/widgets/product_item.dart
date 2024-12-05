@@ -3,6 +3,7 @@ import 'package:task2/local_persistence/LanguageManager.dart';
 import '../local_persistence/FavoritesManager.dart';
 import '../models/product.dart';
 import '../screens/product_detail_screen.dart';
+import '../screens/product_list_screen.dart';
 
 class ProductItem extends StatefulWidget {
   final Product product;
@@ -36,6 +37,17 @@ class _ProductItemState extends State<ProductItem> {
             builder: (ctx) => ProductDetailScreen(widget.product),
           ),
         );
+
+        if(isFavoriteChanged != null && isFavoriteChanged != widget.product.isFavorite)
+          {
+            setState(() {
+              widget.product.isFavorite = isFavoriteChanged;
+            });
+          }
+
+        // Recargar productos en la lista de productos
+        final parentState = context.findAncestorStateOfType<ProductListScreenState>();
+        parentState?.loadProducts(); // Llamar a la función para recargar los productos
       },
       child: Container(
         decoration: BoxDecoration(

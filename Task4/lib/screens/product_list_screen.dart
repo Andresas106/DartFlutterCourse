@@ -3,6 +3,7 @@ import 'package:task2/local_persistence/FavoritesManager.dart';
 import 'package:task2/local_persistence/LanguageManager.dart';
 import 'package:task2/models/product.dart';
 import '../data/dummy_data.dart';
+import '../local_persistence/ConfigurationScreen.dart';
 import '../local_persistence/FilterManager.dart';
 import '../widgets/product_item.dart';
 import 'package:task2/navigation/AppRouterDelegate.dart';
@@ -11,21 +12,21 @@ import 'package:task2/navigation/AppRouterDelegate.dart';
 
 class ProductListScreen extends StatefulWidget {
   @override
-  _ProductListScreenState createState() => _ProductListScreenState();
+  ProductListScreenState createState() => ProductListScreenState();
 
 }
 
-class _ProductListScreenState extends State<ProductListScreen> {
+class ProductListScreenState extends State<ProductListScreen> {
   List<Product> _products = []; // Lista original de productos
   List<Product> _filteredProducts = [];
 
   @override
   void initState() {
     super.initState();
-    _loadProducts();
+    loadProducts();
   }
 
-  Future<void> _loadProducts() async {
+  Future<void> loadProducts() async {
     _products = await initializeProducts();
     setState(() {});
 
@@ -89,6 +90,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
         title:  Text('${LanguageManager().translate('products')}',style: TextStyle(color: Colors.white,
           fontWeight: FontWeight.bold,)),
         backgroundColor: Colors.deepPurple,
+        actions: [
+          IconButton(onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => ConfigurationScreen(),
+                )
+    );
+    }, icon: Icon(Icons.settings, color: Colors.white,))
+        ],
       ),
       body: Stack(
         children: [

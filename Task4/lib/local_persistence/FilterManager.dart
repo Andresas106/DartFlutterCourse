@@ -9,12 +9,12 @@ class FilterManager
 
   FilterManager._internal();
 
-  String _currentFilter = 'price';
+  String _currentFilter = 'title';
 
   Future<void> loadFilter() async
   {
     final prefs = await SharedPreferences.getInstance();
-    _currentFilter = prefs.getString('productFilter') ?? 'price';
+    _currentFilter = prefs.getString('productFilter') ?? 'title';
   }
 
   Future<void> saveFilter(String filterCode) async
