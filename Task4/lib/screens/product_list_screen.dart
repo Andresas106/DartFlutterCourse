@@ -3,7 +3,7 @@ import 'package:task2/local_persistence/FavoritesManager.dart';
 import 'package:task2/local_persistence/LanguageManager.dart';
 import 'package:task2/models/product.dart';
 import '../data/dummy_data.dart';
-import '../local_persistence/ConfigurationScreen.dart';
+import 'ConfigurationScreen.dart';
 import '../local_persistence/FilterManager.dart';
 import '../widgets/product_item.dart';
 import 'package:task2/navigation/AppRouterDelegate.dart';
@@ -28,14 +28,14 @@ class ProductListScreenState extends State<ProductListScreen> {
 
   Future<void> loadProducts() async {
     _products = await initializeProducts();
-    setState(() {});
-
+    setState(() {
+    });
     _loadFilter();
+
 }
 
   Future<List<Product>> initializeProducts() async {
     final favoriteIds = await FavoritesManager.getFavorites();
-    print('$favoriteIds');
     return dummyProducts.map((product) {
     return Product(id: product.id,
         title: product.title,
@@ -76,6 +76,7 @@ class ProductListScreenState extends State<ProductListScreen> {
       }
     });
 
+
   }
 
   @override
@@ -91,12 +92,20 @@ class ProductListScreenState extends State<ProductListScreen> {
           fontWeight: FontWeight.bold,)),
         backgroundColor: Colors.deepPurple,
         actions: [
-          IconButton(onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (ctx) => ConfigurationScreen(),
-                )
-    );
+          IconButton(onPressed: () async {
+            final result = await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (ctx) => ConfigurationScreen(),
+              ),
+            );
+
+            if (result != null) {
+              setState(() {
+                LanguageManager().changeLanguage(result['language']);
+                FilterManager().saveFilter(result['filter']);
+                loadProducts(); // Actualiza la lista con el filtro aplicado.
+              });
+            }
     }, icon: Icon(Icons.settings, color: Colors.white,))
         ],
       ),
@@ -122,6 +131,7 @@ class ProductListScreenState extends State<ProductListScreen> {
               ),
               itemBuilder: (ctx, i) => ProductItem(
                 _filteredProducts[i],
+                this
               ),
             ),
           ),

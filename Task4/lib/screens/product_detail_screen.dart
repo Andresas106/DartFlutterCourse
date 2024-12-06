@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:task2/local_persistence/ConfigurationScreen.dart';
+import 'package:task2/screens/ConfigurationScreen.dart';
+import 'package:task2/screens/product_list_screen.dart';
+import '../local_persistence/FilterManager.dart';
 import '../local_persistence/LanguageManager.dart';
 import '../local_persistence/FavoritesManager.dart';
 import '../models/product.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Product product;
+  final ProductListScreenState parentState;
 
-  const ProductDetailScreen(this.product, {super.key});
+  const ProductDetailScreen(this.product, this.parentState, {super.key});
 
   @override
   _ProductDetailScreenState createState() => _ProductDetailScreenState();
@@ -47,12 +50,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 fontWeight: FontWeight.bold,
               )),
           actions: [
-            IconButton(onPressed: () {
-              Navigator.of(context).push(
+            IconButton(onPressed: () async {
+              final result = await Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (ctx) => ConfigurationScreen(),
                   ),
               );
+
+              if(result != null)
+                {
+                  setState(() {
+                    LanguageManager().changeLanguage(result['language']);
+                    FilterManager().saveFilter(result['filter']);
+                    // Si necesitas actualizar los productos basados en el filtro.
+                    widget.parentState.loadProducts();
+                  });
+                }
             }, icon: Icon(Icons.settings, color: Colors.white,)),
             IconButton(
                 icon: Icon(

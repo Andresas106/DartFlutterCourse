@@ -11,6 +11,7 @@ class LanguageManager
   Map<String, dynamic> _translations = {};
   String _currentLanguage = 'en';
 
+
   Future<void> loadTranslations(String languageCode) async
   {
     try {

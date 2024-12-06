@@ -7,8 +7,9 @@ import '../screens/product_list_screen.dart';
 
 class ProductItem extends StatefulWidget {
   final Product product;
+  final ProductListScreenState parentState;
 
-  const ProductItem(this.product, {super.key});
+  const ProductItem(this.product, this.parentState, {super.key});
 
   @override
   _ProductItemState createState() => _ProductItemState();
@@ -34,7 +35,7 @@ class _ProductItemState extends State<ProductItem> {
       onTap: () async {
         bool? isFavoriteChanged = await Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (ctx) => ProductDetailScreen(widget.product),
+            builder: (ctx) => ProductDetailScreen(widget.product, widget.parentState),
           ),
         );
 
@@ -45,9 +46,8 @@ class _ProductItemState extends State<ProductItem> {
             });
           }
 
-        // Recargar productos en la lista de productos
-        final parentState = context.findAncestorStateOfType<ProductListScreenState>();
-        parentState?.loadProducts(); // Llamar a la función para recargar los productos
+
+        widget.parentState.loadProducts(); // Llamar a la función para recargar los productos
       },
       child: Container(
         decoration: BoxDecoration(
