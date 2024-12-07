@@ -44,14 +44,26 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
     await FilterManager().saveFilter(filter);
   }
 
+  Future<bool> _onWillPop() async {
+    Navigator.of(context).pop({
+      'language' : _selectedLanguage,
+      'filter' : _selectedFilter,
+    });
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return Scaffold(
+
+
+
+    return WillPopScope(onWillPop: _onWillPop,
+    child: Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(LanguageManager().translate('configuration')),
+        automaticallyImplyLeading: false,
+        title: Text(LanguageManager().translate('configuration')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,7 +71,7 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(LanguageManager().translate('language'),
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
             DropdownButton<String>(
               value: _selectedLanguage,
               items: [
@@ -78,7 +90,7 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
             ),
             SizedBox(height: 20,),
             Text(LanguageManager().translate('sort_products'),
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             DropdownButton<String>(
               value: _selectedFilter,
@@ -124,10 +136,13 @@ class _ConfigurationScreenState extends State<ConfigurationScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
+    )
     );
+
+
   }
 }
